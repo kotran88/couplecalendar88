@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <video width="400"   autoplay loop>
+    <source src="assets/imgs/ab.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video> -->
+  <video autoplay loop preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" class="videoPlayer"><source src="assets/imgs/ab.mp4" type="video/mp4"/></video>
+
+  <!-- <video #video1 preload=“metadata” webkit-playsinline=“webkit-playsinline” ></video> -->
+  <button (click)="kakao()">카카오</button>
+  <button (click)="naver()">naver</button>
+</ion-content>
