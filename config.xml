@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.calendarforcouple.myapplication" version="1.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
+    <name>달력서비스</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -87,5 +87,7 @@
         <variable name="OAUTH_CLIENT_SECRET" value="n19E5LNLiS" />
         <variable name="OAUTH_CLIENT_NAME" value="couple" />
     </plugin>
-    <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-wheel-selector-plugin" spec="1.1.2" />
+    <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-datepicker" spec="0.9.3" />
 </widget>

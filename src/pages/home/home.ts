@@ -4,7 +4,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { KakaoCordovaSDK,AuthTypes } from 'kakao-sdk';
 import { Naver } from "ionic-plugin-naver";
 import { MainPage } from '../main/main';
- 
+import { LoginPage } from '../login/login';
+import { RegisterTypePage } from '../register-type/register-type';
 declare var PhoneCallTrap:any;
 
 
@@ -64,5 +65,10 @@ export class HomePage {
     })
 
   }
-
+  login() {
+     this.navCtrl.push(LoginPage, {} , {animate:false});
+  }
+  register() {
+    this.navCtrl.push(RegisterTypePage, {} , {animate:false});
+  }
 }

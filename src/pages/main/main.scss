@@ -1,56 +1,444 @@
 page-main {
-    .exercise{
-        background-image:url('./../../assets/icon/exer_Icon.svg');
+
+  .exercise{
+
+      background-image:url('./../../assets/icon/exer_Icon.svg');
+
+  }
+  ion-item-group[submenu]{
+    padding-left:10% !important;
+  }
+  .mybtnclicked{
+
+    color: black;
+
+    width: 22%;
+
+    height: 2.8rem;
+
+    text-transform: capitalize;
+
+    font-size: 14px;
+
+    background: transparent;
+
+    box-shadow: none !important;
+
+}
+.menu-content-reveal{
+  transform:none !important;
+}
+.ios .menu-content-reveal{
+  transform:none !important;
+}
+.toolbar-background-ios{
+
+    background-color:white !important;
+
+}
+
+.scroll-content{
+
+    margin-top:45px !important;
+
+}
+
+.menu-inner{
+
+    width: 60%;
+
+}
+
+.toolbar-background-md {
+
+    background-color:white !important
+
+}
+
+.menu-content-open{
+
+z-index: 0 !important;
+
+}
+
+.slide-zoom{
+
+}
+
+ion-menu.show-menu{
+
+    z-index: 499 !important;
+
+    top:8.5%;
+
+}
+
+.title{
+
+    color: black !important;
+
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{
+
+    color:gray !important;
+
+}
+
+.toolbar-background toolbar-background-ios{
+
+    background:white;
+
+    border-style:none;
+
+}
+
+.c{
+
+    .scroll-content{
+
+        margin-top:0px !important;
+
+        margin-bottom: 56px;
+
     }
-    [col-1] {
-      -webkit-box-flex: 0;
-      -webkit-flex: 0 0 8.33333%;
-      -ms-flex: 0 0 8.33333%;
-      flex: 0 0 14.285714285714286%;
-      width: 14.285714285714286%;
-      max-width: 14.285714285714286%;
-    }
-    .col {
+
+    .profile{
+
+      height: 15%;
+
+      background: white;
+
+      margin-top: 0;
+
       text-align: center;
-      padding: 5px;
+
+      width: 100%;
+
+      margin-left: auto;
+
+      margin-right: auto;
+
+      p{
+
+          font-size: 1.2rem;
+
+          text-align: left;
+
+          float: left;
+
+          width: 60%;
+
+          margin: 0;
+
+          margin-left: 1rem;
+
+          margin-top: 1rem;
+
+      }
+
     }
-    .last-month, .next-month {
-      color: #999999;
-      font-size: 90%;
-    }
-    .currentDate, .otherDate {
-      padding: 5px;
-    }
-    .currentDate {
-      font-weight: bold;
-      background-color: red;
-      color: white;
-      border-radius: 30px;
-    }
-    .calendar-header {
-        font-weight: bold;
-      color: black;
-    }
+
     
-    .selected-date {
-      width: 20px;
-      height: 2px;
-      background-color: blue;
+
+    img{
+
+        float: left;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+
+        height: 60%;
+
+        margin-left: 1.5rem;
+
+        margin-top: 2rem;
+
     }
-    .unselected-date {
-      border: none;
+
+    .left{
+
+        float: right;
+
+        height: 100%;
+
+        width: 60%;
+
+        margin-top: 1rem;
+
     }
-    .calendar-body {
-      .grid {
-        padding: 0;
-      }
-      .col:last-child {
-        border-right: none;
-      }
-      .calendar-weekday, .calendar-date {
-        text-align: center;
-        margin: 0;
-      }
-     
+
+    
+
+      top:0%;
+
+    .scroll-content{
+
+        .list list-md{
+
+            text-align: center;
+
+        }
+
+      top:0%;
+
     }
+
+    
+
+}
+
+
+
+.menu-content menu-content-overlay{
+
+ z-index:0 !important;
+
+}
+
+
+
+.scroll-content{
+
+    padding:0 !important;
+
+}
+
+.subtitle{
+
+  
+
+  float: left;
+
+  width: 20%;
+
+  background-color: aliceblue;
+
+  border: solid 1px;
+
+
+
+}
+.display_add {
+  display: -webkit-box;
+}
+.nodisplay {
+  display:none;
+}
+.bottommain{
+
+  border : solid 1px;
+
+}
+.food_daily {
+  display: -webkit-box;
+}
+.food_daily > div {
+  margin:0.5%;
+  width:24%;
+  height:80px;
+  border:1px solid grey;
+  text-align:center;
+}
+.food_daily > div > *{ 
+  font-weight: border;
+}
+.exercise_type {
+  border:1px dotted grey; margin: 0 3%;
+            width: 35%;
+}
+.exercise_type > * {
+  width:80%;
+  margin:0 10%;
+}
+.exercise_rate {
+  border:1px dotted grey; width: 55%;
+}
+.exercise_rate > * {
+  width:80%;
+  margin:0 10%;
+}
+.coffee {
+  margin: 1%;
+  height:40px;
+}
+.water {
+  margin: 1% 2%;
+  height:40px;
+}
+.item-md.item-block .item-inner {
+
+padding-right:0 !important;
+
+}
+
+ionmenu{
+
+    top:7% !important;
+
+    z-index: 150 !important;
+
+}
+
+.subsub{
+
+  width:90%;
+
+}
+
+ion-header {
+
+    height: 45px;//by default 56px
+
+  }
+
+  ion-navbar.toolbar {
+
+    min-height: 45px;
+
+  }
+
+  
+
+  ion-item-group[submenu] {
+
+    overflow: hidden;
+
+    display: block;
+
+    height: 0;
+
+    transition: height .3s linear;
+
+    padding-left: 20%;
+
+    &.visible {
+
+        height: inherit;
+
+        // this is just sample value, calculate how much space you need for your menu items
+
+    }
+
+  }
+
+
+
+ion-label{
+
+    font-size: 13px;
+
+}
+
+.profile{
+
+    text-align: center;
+
+}
+
+
+
+  [col-1] {
+
+    -webkit-box-flex: 0;
+
+    -webkit-flex: 0 0 8.33333%;
+
+    -ms-flex: 0 0 8.33333%;
+
+    flex: 0 0 14.285714285714286%;
+
+    width: 14.285714285714286%;
+
+    max-width: 14.285714285714286%;
+
+  }
+
+  .col {
+
+    text-align: center;
+
+    padding: 5px;
+
+  }
+
+  .last-month, .next-month {
+
+    color: #999999;
+
+    font-size: 90%;
+
+  }
+
+  .currentDate, .otherDate {
+
+    padding: 5px;
+
+  }
+
+  .currentDate {
+
+    font-weight: bold;
+
+    background-color: red;
+
+    color: white;
+
+    border-radius: 30px;
+
+  }
+
+  .calendar-header {
+
+      font-weight: bold;
+
+    color: black;
+
+  }
+
+  
+
+  .selected-date {
+
+    width: 20px;
+
+    height: 2px;
+
+    background-color: blue;
+
+  }
+
+  .unselected-date {
+
+    border: none;
+
+  }
+
+  .calendar-body {
+
+    .grid {
+
+      padding: 0;
+
+    }
+
+    .col:last-child {
+
+      border-right: none;
+
+    }
+
+    .calendar-weekday, .calendar-date {
+
+      text-align: center;
+
+      margin: 0;
+
+    }
+
+   
+
+  }
+
 }

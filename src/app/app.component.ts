@@ -6,11 +6,13 @@ import { KakaoCordovaSDK } from 'kakao-sdk';
 
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
+import { RegisterPage} from '../pages/register/register';
+import {LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = MainPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

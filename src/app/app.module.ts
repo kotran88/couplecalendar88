@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { KakaoCordovaSDK } from 'kakao-sdk';
 import { Naver } from "ionic-plugin-naver";
+import { DatePicker } from '@ionic-native/date-picker/ngx';
+
 import { AngularFireModule } from 'angularfire2';
 // for AngularFireDatabase
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -17,7 +19,19 @@ import firebase from 'firebase';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
+import { RegisterPage } from '../pages/register/register';
+import { LoginPage} from '../pages/login/login';
+import { RegisterTypePage } from '../pages/register-type/register-type';
+import { FindPwPage } from '../pages/find-pw/find-pw';
+import {CameraselectPage } from '../pages/cameraselect/cameraselect';
+import { SettingPage } from '../pages/setting/setting';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { WheelSelector } from '@ionic-native/wheel-selector';
 
+import { OneSignal } from '@ionic-native/onesignal/';
+import { ManagementPage } from '../pages/management/management';
+import { CalendarmodalPage } from '../pages/calendarmodal/calendarmodal';
+import { CounselingpagePage } from '../pages/counselingpage/counselingpage';
 var config = {
   apiKey: "AIzaSyBoXTwwQkwmEAvqpUCnKX5xvM7DFtHCKeQ",
   authDomain: "cosmetics-bac3b.firebaseapp.com",
@@ -30,27 +44,49 @@ firebase.initializeApp(config);
 @NgModule({
   declarations: [
     MyApp,
+    CalendarmodalPage,
     HomePage,
-    MainPage
+    ManagementPage,
+    MainPage,
+    RegisterPage,
+    LoginPage,
+    RegisterTypePage,
+    CounselingpagePage,
+    FindPwPage,
+    CameraselectPage,
+    SettingPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(config)
+    AngularFireModule.initializeApp(config),
+    RoundProgressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    MainPage
+    CounselingpagePage,
+    MainPage,
+    RegisterPage,
+    CalendarmodalPage,
+    LoginPage,
+    RegisterTypePage,
+    ManagementPage,
+    FindPwPage,
+    CameraselectPage,
+    SettingPage
   ],
   providers: [
     StatusBar,
     InAppBrowser,
     KakaoCordovaSDK,
+    OneSignal,
     Naver,
     AngularFireAuth,
+    DatePicker,
+    WheelSelector,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
