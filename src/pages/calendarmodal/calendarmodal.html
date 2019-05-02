@@ -2,58 +2,144 @@
 
 <ion-content class="main-view" style="background: transparent;
 background-color: transparent;
-top: 30%;" padding>
+top: 25%;" padding>
+    
     
   <div class="modal_content">
-    <div class="modal_title">{{date}}</div>
-    <table>
-      <tr>
-        <td>Loved Day</td>
-        <td><img src="assets/imgs/love_ledline.png" (click)="loveday($event)"></td>
-      </tr>
-      <tr>
-        <td>생리 시작</td>
-        <td style="position:absolute;"> 
-          <!-- <div class="pick" style="position:absolute; top:35%;">
-            <button (click)="sgri_st_true()" [ngClass]="sgri_start==true?'display':'nodisplay'" style="top:-35%;">ON</button>
-            <button (click)="sgri_st_false()" [ngClass]="sgri_start==true?'nodisplay':'display'" style="top:-35%;">OFF</button>
-          </div> -->
-          <ion-toggle style="margin: auto;" [(ngModel)]="interval"></ion-toggle>
-        </td>
-      </tr>
-      <tr>
-        <td>생리 마침</td>
-        <td style="position:absolute;"> 
-            <!-- <div class="pick" style="position:absolute; top:35%;">
-              <button (click)="sgri_end_true()" [ngClass]="sgri_end==true?'display':'nodisplay'"  style="top:-35%;">ON</button>
-              <button (click)="sgri_end_false()" [ngClass]="sgri_end==true?'nodisplay':'display'"  style="top:-35%;">OFF</button>
-            </div> -->
-            <ion-toggle style="margin: auto;" [(ngModel)]="duration"></ion-toggle>
-          </td>
-      </tr>
-      <tr>
-        <td>생리 양</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>생리 통</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>병원 방문</td>
-        <td><button (click)="hospital_visit()">일시</button></td>
-      </tr>
-      <tr>
-        <td>체중(BMI)</td>
-        <td><button (click)="bmi_write()">기록</button></td>
-      </tr>
-      <tr>
-        <td>노트</td>
-        <td><button (click)="note_write()">기록</button></td>
-      </tr>
-    </table>
+    <div *ngIf="first==true" class="normal_mode">
+        <div class="modal_title">{{date}}</div>
+        <table>
+          <tr>
+            <td>Loved Day</td>
+            <td><img src="assets/imgs/love_ledline.png" (click)="loveday($event)"></td>
+          </tr>
+          <tr>
+            <td>생리 시작</td>
+            <td style="position:absolute;"> 
+              <!-- <div class="pick" style="position:absolute; top:35%;">
+                <button (click)="sgri_st_true()" [ngClass]="sgri_start==true?'display':'nodisplay'" style="top:-35%;">ON</button>
+                <button (click)="sgri_st_false()" [ngClass]="sgri_start==true?'nodisplay':'display'" style="top:-35%;">OFF</button>
+              </div> -->
+              <ion-toggle style="margin: auto;" [(ngModel)]="interval"></ion-toggle>
+            </td>
+          </tr>
+          <tr>
+            <td>생리 마침</td>
+            <td style="position:absolute;"> 
+                <!-- <div class="pick" style="position:absolute; top:35%;">
+                  <button (click)="sgri_end_true()" [ngClass]="sgri_end==true?'display':'nodisplay'"  style="top:-35%;">ON</button>
+                  <button (click)="sgri_end_false()" [ngClass]="sgri_end==true?'nodisplay':'display'"  style="top:-35%;">OFF</button>
+                </div> -->
+                <ion-toggle style="margin: auto;" [(ngModel)]="duration"></ion-toggle>
+              </td>
+          </tr>
+          <tr>
+            <td>생리 양</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>생리 통</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>병원 방문</td>
+            <td><button (click)="hospital_visit()">일시</button></td>
+          </tr>
+          <tr>
+            <td>체중(BMI)</td>
+            <td><button (click)="bmi_write()">기록</button></td>
+          </tr>
+          <tr>
+            <td>노트</td>
+            <td><button (click)="note_write()">기록</button></td>
+          </tr>
+        </table>
+    
+      <button id="confirm_btn"(click)="confirm()">등록</button>
+    </div>
+    <div *ngIf="second==true" class="bmi_mode">
+   
+      <div  class="contents">
+          <ion-list no-lines>
+            <!-- 이메일 -->
+            <!-- 이메일 -->
+            <ion-item class="content email">
+                <ion-label style="display:flex;  width:30%;">키(cm)<p style="color:#ff0000;">(필수)</p></ion-label>
+                <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="name" type="text" placeholder="키를 입력해주세요"></ion-input>
+              </ion-item>
+              <ion-item class="content email">
+                <ion-label style="display:flex;  width:30%; ">몸무게(kg)<p style="color:#ff0000;">(필수)</p></ion-label>
+                <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="tel" type="tel" placeholder="몸무게를 입력해주세요"></ion-input>
+              </ion-item>
+            </ion-list>
+          
+            <button (click)="calculate();" ion-button>BMI계산</button>
+            <textarea 
+            [(ngModel)]="content" style="border: solid 1px;
+            border-radius: 10px;
+            width: 80%;
+            display: block;
+            margin: auto;" rows="4" cols="50"></textarea>
+        </div>
+    
+    </div>
+    <div  *ngIf="third==true" class="note_mode">
+        <div  class="contents">
+              
+<p>오늘은 {{date}}</p>
+<p>메모</p>
+              <textarea 
+              [(ngModel)]="content" style="border: solid 1px;
+              border-radius: 10px;
+              width: 80%;
+              display: block;
+              margin: auto;" rows="4" cols="50"></textarea>
+          </div>
 
-  <button id="confirm_btn"(click)="confirm()">등록</button>
-  </div>
+          <button (click)="confirm();" ion-button>저장하기</button>
+
+    </div>
+    <div  *ngIf="hospital==true" class="note_mode">
+        <div class="modal_title">병원 진료 일정</div>
+        <div  class="contents">
+              
+<p>병원이름</p>
+<div class="upper">
+    <div (click)="setExercise1();" style="idth: 40%;
+    float: left;
+    display: grid;">
+        <button >ㅅ</button>
+        <input style="text-align: center;"  value={{exerciseIntensity}} type="text" size=4 readonly/>
+        <button>V</button>
+      </div>
+      <ion-input style="border: 1px solid grey;
+      border-radius: 5px;
+      width: 55%;
+      float: right;
+      line-height: 2.5em;" [(ngModel)]="tel" type="tel" placeholder="몸무게를 입력해주세요"></ion-input>
+    
+</div>
+<div class="reservation">
+
+    <p>예약시간</p>
+</div>
+<div class="type">
+
+    <p>진료형태</p>
+</div>
+
+<p>준비 사항 및 진료내용</p>
+              <textarea 
+              [(ngModel)]="content" style="border: solid 1px;
+              border-radius: 10px;
+              width: 80%;
+              display: block;
+              margin: auto;" rows="4" cols="50"></textarea>
+          </div>
+
+          <button (click)="confirm();" ion-button>저장하기</button>
+
+    </div>
+    </div>
   </ion-content>
   

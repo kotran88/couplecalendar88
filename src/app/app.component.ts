@@ -11,6 +11,9 @@ import {LoginPage } from '../pages/login/login';
 import { Main2Page } from '../pages/main2/main2';
 import { ManagementPage } from '../pages/management/management';
 import { Main3Page } from '../pages/main3/main3';
+import { CounselingpagePage } from '../pages/counselingpage/counselingpage';
+import { SelfhelpingPage } from '../pages/selfhelping/selfhelping';
+import { InviteparejaPage } from '../pages/invitepareja/invitepareja';
 @Component({
   templateUrl: 'app.html'
 })
@@ -93,10 +96,21 @@ menuItemHandler(): void {
   mv_main3() {
     this.nav.setRoot(Main3Page,{"flag":"transit"});
   }
+  selfhelping(){
+
+  
+  this.nav.push(SelfhelpingPage,{"id":"test","flag":"transit"})
+  }
+  invitepareja(){
+    this.nav.push(InviteparejaPage,{"flag":"transit"})
+  }
  gotomanagement(){
-   this.nav.push(ManagementPage,{"id":"test"})
+  this.nav.push(ManagementPage,{"id":"test","flag":"transit"})
  }
- 
+ counseling(){
+  
+  this.nav.push(CounselingpagePage,{"id":"test","flag":"transit"})
+ }
 menuItemHandlerfirst(): void {
 
   this.showSubmenufirst = !this.showSubmenufirst;

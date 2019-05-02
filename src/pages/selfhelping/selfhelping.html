@@ -1,0 +1,113 @@
+<!--
+  Generated template for the SelfhelpingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>selfhelping</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="calendar-header">
+
+    <ion-row class="calendar-month">
+
+      <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+
+      <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+
+      <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+
+    </ion-row>
+
+  </div>
+
+  <div class="calendar-body">
+
+    <ion-grid>
+
+      <ion-row class="calendar-weekday">
+
+        <ion-col>Su</ion-col>
+
+        <ion-col>Mo</ion-col>
+
+        <ion-col>Tu</ion-col>
+
+        <ion-col>We</ion-col>
+
+        <ion-col>Th</ion-col>
+
+        <ion-col>Fr</ion-col>
+
+        <ion-col>Sa</ion-col>
+
+      </ion-row>
+
+      <ion-row class="calendar-date">
+
+        <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
+
+        <ion-col style="height:85px; border-top:1px solid #3D3E3F;" col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day)">
+
+          <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}
+            </span>
+          <ng-template #otherDate class="otherDate">
+            {{day}}<br>
+          </ng-template>
+          <div (click)="clickcalendar(day);"  *ngFor="let a of checkEvent(day)">
+
+            <!-- 
+
+            <span class="face" *ngIf="a.face!='no'&&a.face"><img style="width:12px; height:12px;" *ngIf="a.face!='no'" src="./../../assets/icon/soap.png" /> </span> 
+
+           
+            <span class="photo" *ngIf="a.photo!='no'&&a.photo"><img style="width:12px; height:12px;" *ngIf="a.photo!='no'" src="./../../assets/icon/photo-camera.png" />  </span>  -->
+
+            </div>
+
+        </ion-col>
+
+        <!-- <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col> -->
+
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+  <div  class="contents">
+    <ion-list no-lines>
+      <!-- 이메일 -->
+      <ion-item class="content email">
+        <ion-label style="display:flex;  width:30%;">이름<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="name" type="text" placeholder="이메일 주소 입력"></ion-input>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex;  width:30%; ">연락처<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="tel" type="tel" placeholder="이메일 주소 입력"></ion-input>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:30%;">상담유형<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-select [(ngModel)]="type">
+          <ion-option value="nes">NES</ion-option>
+          <ion-option value="nes2">NES2</ion-option>
+         </ion-select>
+      </ion-item>
+      </ion-list>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:100%">내용<p style="color:#ff0000;">(필수)</p></ion-label>
+      </ion-item>
+      
+      <textarea 
+      [(ngModel)]="content" style="border: solid 1px;
+      border-radius: 10px;
+      width: 80%;
+      display: block;
+      margin: auto;" rows="4" cols="50"></textarea>
+  </div>
+  <button (click)="confirm();" ion-button>신청완료</button>
+</ion-content>

@@ -34,6 +34,8 @@ import { ManagementPage } from '../pages/management/management';
 import { CalendarmodalPage } from '../pages/calendarmodal/calendarmodal';
 import { CounselingpagePage } from '../pages/counselingpage/counselingpage';
 import { PrivateAgreePage } from '../pages/private-agree/private-agree';
+import { SelfhelpingPage } from '../pages/selfhelping/selfhelping';
+import { InviteparejaPage } from '../pages/invitepareja/invitepareja';
 var config = {
   apiKey: "AIzaSyBoXTwwQkwmEAvqpUCnKX5xvM7DFtHCKeQ",
   authDomain: "cosmetics-bac3b.firebaseapp.com",
@@ -54,9 +56,11 @@ firebase.initializeApp(config);
     Main3Page,
     RegisterPage,
     LoginPage,
+    SelfhelpingPage,
     RegisterTypePage,
     CounselingpagePage,
     FindPwPage,
+    InviteparejaPage,
     SettingPage,
     PrivateAgreePage
   ],
@@ -71,12 +75,14 @@ firebase.initializeApp(config);
   entryComponents: [
     MyApp,
     HomePage,
+    SelfhelpingPage,
     CounselingpagePage,
     MainPage,
     Main2Page,
     Main3Page,
     RegisterPage,
     CalendarmodalPage,
+    InviteparejaPage,
     LoginPage,
     RegisterTypePage,
     ManagementPage,

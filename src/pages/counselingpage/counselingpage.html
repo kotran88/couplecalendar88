@@ -39,7 +39,8 @@
         <ion-label style="display:flex; width:100%">내용<p style="color:#ff0000;">(필수)</p></ion-label>
       </ion-item>
       
-      <textarea style="border: solid 1px;
+      <textarea 
+      [(ngModel)]="content" style="border: solid 1px;
       border-radius: 10px;
       width: 80%;
       display: block;

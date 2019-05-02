@@ -7,6 +7,25 @@ page-calendarmodal {
       color:grey;
       border:none;
     }
+    .contents{
+      padding: 16px;
+  border: solid 1px;
+  border-radius: 10px;
+  width: 85%;
+  margin: auto;
+  }
+  .button{    margin: auto;
+      text-align: center;
+      margin-top: 2em;
+      display: block;}
+  .header{
+      text-align: center;
+      margin-bottom: 2em;
+      margin-top: 2em;
+  }
+  .scroll-content{
+    margin-top:0 !important;
+  }
     .modal_content {
         text-align: center;
         background: white;

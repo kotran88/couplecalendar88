@@ -44,6 +44,7 @@ export class MainPage {
   view:any;
   firedata = firebase.database().ref('/accounts');
 
+  selectedDay:any;
   userId="kim22@naver*com";
   date: any;
 
@@ -239,11 +240,8 @@ export class MainPage {
     this.showLoading();
 
     this.firedata.child(this.userId).once('value').then((snapshot) =>{
-
             var value:any;
-    
             for(var result in snapshot.val()){
-
               if(result=="duration"){
                 this.duration=snapshot.val()[result]
                 console.log("ss"+this.duration);
@@ -527,7 +525,7 @@ menuItemHandler(): void {
   this.showSubmenuthird=!this.showSubmenuthird;
  }
  gotomanagement(){
-   this.navCtrl.push(ManagementPage,{"id":"test"})
+   this.navCtrl.push(ManagementPage,{"id":"test","day":this.selectedDay})
  }
  ionViewDidLoad(){
 
@@ -1158,6 +1156,7 @@ var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
   }
   selectDate(day) {
 
+    this.selectedDay=day;
     console.log(this.currentMonth+"selectDate come:"+day);
     var result = this.checkEvent(day);
     console.log(result);
