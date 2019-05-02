@@ -121,13 +121,13 @@ border-bottom: none !important; z-index: 11 !important">
             </ng-template>
 
             <div (click)="clickcalendar(day);"  *ngFor="let a of checkEvent(day)">
+              <span class="weight"  *ngIf="a.mensual==true" ></span> 
 
-              <!-- <span  *ngIf="a.exercise!='no'&&a.exercise"><img style="width:14px; height:14px;" *ngIf="a.exercise!='no'" src="./../../assets/icon/weightlifting.png" />  </span>
+              <!-- 
 
               <span class="face" *ngIf="a.face!='no'&&a.face"><img style="width:12px; height:12px;" *ngIf="a.face!='no'" src="./../../assets/icon/soap.png" /> </span> 
 
-              <span class="weight" *ngIf="a.weight!='no'&&a.weight"><img style="width:12px; height:12px;" *ngIf="a.exercise!='no'" src="./../../assets/icon/weight.png" /> {{a.weight}} </span> 
-
+             
               <span class="photo" *ngIf="a.photo!='no'&&a.photo"><img style="width:12px; height:12px;" *ngIf="a.photo!='no'" src="./../../assets/icon/photo-camera.png" />  </span>  -->
 
               </div>
@@ -173,7 +173,7 @@ border-bottom: none !important; z-index: 11 !important">
                   <div style="border:1px solid grey;margin-bottom: 3%;">
                     <div (click)="setExercise();" style="width:80%; margin:0 10%; display:grid;">
                       <button (click)="change_ex_before()" style="width:100%">ㅅ</button>
-                      <input style="text-align: center;"  value="조깅" type="text" size=6 readonly/>
+                      <input style="text-align: center;"    value={{exerciseName}} type="text" size=6 readonly/>
                       <button (click)="change_ex_after()" style="width:100%">V</button>
                     </div>
                    
@@ -185,12 +185,12 @@ border-bottom: none !important; z-index: 11 !important">
                   <div style="display: flex;border:1px solid grey;margin-bottom: 3%;">
                     <div (click)="setExercise1();" style="width: 50%;display: grid;">
                       <button >ㅅ</button>
-                      <input style="text-align: center;"  value="상" type="text" size=4 readonly/>
+                      <input style="text-align: center;"  value={{exerciseIntensity}} type="text" size=4 readonly/>
                       <button>V</button>
                     </div>
                     <div (click)="setExercise2();" style="width: 40%;display: grid;">
                       <button>ㅅ</button>
-                      <input style="text-align: center;" value="30분" type="text" size=3 readonly/>
+                      <input style="text-align: center;" value={{exerciseDuration}} type="text" size=3 readonly/>
                       <button >V</button>
                     </div>
                     <div style="width:10%; display:grid;"> <p>분</p></div>
@@ -302,109 +302,5 @@ border-bottom: none !important; z-index: 11 !important">
 
  
 
-  
-
-  <ion-menu style="    z-index: 9999999999 !important;"class="ionmenu" [content]="content"  side="left">
-
-      <ion-content class="c">
-
-          
-
-          
-
-         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-
-            
-
- 
-
-            </button>
-
-
-            
-
-            <ion-list>
-              <ion-item (click)="setting()" >
-
-                Setting
-
-               </ion-item>
-
-                <ion-item (click)="menuItemHandlerfirst()" >
-
-                    Mom & Daddy in Love
-
-                   </ion-item>
-
-                   <ion-item-group submenu [class.visible]="showSubmenufirst">
-
-                      <ion-item submenu-item>About</ion-item>
-
-                      <ion-item submenu-item>For My Baby(Webtoon)</ion-item>
-
-                      <ion-item submenu-item>Medical Information</ion-item>
-
-                    </ion-item-group>
-
-                <ion-item (click)="menuItemHandler()" >
-
-                   부부캘린더
-
-                  </ion-item>
-
-                  <ion-item-group submenu [class.visible]="showSubmenu">
-
-                      <ion-item submenu-item>배란 주기 캘린더</ion-item>
-
-                      <ion-item submenu-item>인공수정 캘린더</ion-item>
-
-                      <ion-item submenu-item>시험관 아기 캘린더</ion-item>
-
-                    </ion-item-group>
-
- 
-
-                  <ion-item  (click)="menuItemHandlerthird()">
-
-                      부부 습관 개선
-
-                    </ion-item>
-                    <ion-item-group submenu [class.visible]="showSubmenuthird">
-
-                      <ion-item submenu-item (click)="gotomanagement();">운동</ion-item>
-                      <ion-item submenu-item>식단</ion-item>
-                      <ion-item submenu-item>카페인</ion-item>
-                      <ion-item submenu-item>물</ion-item>
-
-                    </ion-item-group>
-                    <ion-item (click)="menuItemHandlerfourth()"
-                   >
-
-                       심리상담
-
-                      </ion-item>
-                      <ion-item-group submenu [class.visible]="showSubmenufourth">
-
-                        <ion-item  (click)="counseling();" submenu-item >심리 상담 신청</ion-item>
-                        <ion-item submenu-item>자조 모임 신청</ion-item>
-  
-                      </ion-item-group>
-                      <ion-item >
-
-                          배우자 초대
-
-                        </ion-item>
-
-                      
-
-                     
-
-            </ion-list>
-
-    
-
-  </ion-content>
-
-  </ion-menu>
 
 

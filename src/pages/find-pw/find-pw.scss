@@ -1,0 +1,29 @@
+page-find-pw {
+ * {
+    font-size:3.9vw;
+ }
+.scroll-content {
+    overflow-y: hidden;
+ }
+    .contents {
+        width:80%;
+        left:10%;
+        position: absolute;
+        top:5%;
+    }
+    h5 {
+        margin-top:30%;
+    }
+    input {
+        height:40px;
+        padding:5px;
+        width:100%;
+    }
+    button {
+        border-radius: 5px;
+        border:1px solid grey;
+        height:40px;
+        margin-top:20px;
+        width: 100%;
+    }
+}

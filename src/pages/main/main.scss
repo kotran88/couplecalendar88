@@ -227,9 +227,7 @@ ion-menu.show-menu{
   display:none;
 }
 .bottommain{
-
   border : solid 1px;
-
 }
 .food_daily {
   display: -webkit-box;
@@ -266,6 +264,14 @@ ion-menu.show-menu{
 .water {
   margin: 1% 2%;
   height:40px;
+}
+.weight{
+  width: 53.56px;
+    height: 15px;
+    background: red;
+    display: table-cell;
+    bottom: 0;
+    position: absolute;
 }
 .item-md.item-block .item-inner {
 

@@ -1,0 +1,49 @@
+<!--
+  Generated template for the CounselingpagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>심리상담</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="header">
+    심리상담을 신청하신 분은 <br>
+    검증된 전문가와 연결됩니다. 
+  </div>
+  <div  class="contents">
+    <ion-list no-lines>
+      <!-- 이메일 -->
+      <ion-item class="content email">
+        <ion-label style="display:flex;  width:30%;">이름<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="name" type="text" placeholder="이메일 주소 입력"></ion-input>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex;  width:30%; ">연락처<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-input style="border:1px solid grey; border-radius: 5px;" [(ngModel)]="tel" type="tel" placeholder="이메일 주소 입력"></ion-input>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:30%;">상담유형<p style="color:#ff0000;">(필수)</p></ion-label>
+        <ion-select [(ngModel)]="type">
+          <ion-option value="nes">NES</ion-option>
+          <ion-option value="nes2">NES2</ion-option>
+         </ion-select>
+      </ion-item>
+      </ion-list>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:100%">내용<p style="color:#ff0000;">(필수)</p></ion-label>
+      </ion-item>
+      
+      <textarea style="border: solid 1px;
+      border-radius: 10px;
+      width: 80%;
+      display: block;
+      margin: auto;" rows="4" cols="50"></textarea>
+  </div>
+  <button (click)="confirm();" ion-button>신청완료</button>
+</ion-content>

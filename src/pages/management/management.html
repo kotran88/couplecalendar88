@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Charts in Ionic 2
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="calendar-header">
+
+        <ion-row class="calendar-month">
+  
+          <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+  
+          <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+  
+          <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+  
+        </ion-row>
+  
+      </div>
+    <div class="status">
+      <p>{{current}}%</p>
+    </div>
+  <round-progress [current]="current" [max]="max" [stroke]="stroke" [radius]="radius" [semicircle]="semicircle" [rounded]="rounded"
+  [responsive]="responsive" [clockwise]="clockwise" [color]="gradient ? 'url(#gradient)' : color" [background]="background"
+  [duration]="duration" [animation]="animation" [animationDelay]="animationDelay" style="left:10%;">
+</round-progress>
+ <div class="goal">
+   <p>운동소모 칼로리</p>
+   <!-- Kcal 값 받아오기 -->
+   <p style="font-size:11vw;">000 Kcal</p><hr>
+   <p>목표칼로리 500Kcal</p>
+ </div>
+    <ion-card>
+      <ion-card-header>
+        Bar Chart
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barCanvas></canvas>
+        <div class="chart_help">
+          <button class="chart_select_date" (click)="setDate">기간 설정</button>
+          <div class="chart_pick_date">
+            <button>1주</button>
+            <button>1달</button>
+          </div>
+        </div>
+      </ion-card-content>
+
+    </ion-card>
+
+    
+
+</ion-content>

@@ -10,7 +10,7 @@
 
  */
 
-import { NavController,LoadingController,ModalController } from 'ionic-angular';
+import { NavController,NavParams,MenuController,LoadingController,ModalController } from 'ionic-angular';
 import { WheelSelector } from '@ionic-native/wheel-selector';
 
 import firebase from 'firebase';
@@ -23,6 +23,9 @@ import { SettingPage } from '../setting/setting';
 import { ManagementPage } from '../management/management';
 import { CalendarmodalPage } from '../calendarmodal/calendarmodal';
 import { CounselingpagePage } from '../counselingpage/counselingpage';
+import { Main2Page } from '../main2/main2';
+import { Main3Page } from '../main3/main3';
+import { Naver } from 'ionic-plugin-naver';
 @Component({
 
   selector: 'page-main',
@@ -32,11 +35,12 @@ import { CounselingpagePage } from '../counselingpage/counselingpage';
 })
 
 export class MainPage {
-
- 
-  exerciseName:any="namenone";
-  exerciseIntensity:any="intensitynone"
-  exerciseDuration:any="durationnone"
+  exerciseCal:any="";
+  exerciseIndex:any="";
+  exerciseName:any="종목 설정";
+  exerciseIntensity:any="강도 설정"
+  exerciseIntensity_index:any="";
+  exerciseDuration:any="시간 설정"
   view:any;
   firedata = firebase.database().ref('/accounts');
 
@@ -50,11 +54,12 @@ export class MainPage {
     daysInNextMonth: any;
 
     monthNames: string[];
-
+    interval:any;
     currentMonth: any;
 
     currentYear: any;
 
+    duration:any;
     currentDate: any;
 
     eventList: any;
@@ -87,18 +92,116 @@ export class MainPage {
   showSubmenufirst:boolean=false;
 
   title:any="main page"
+  jul=[84,105,126];
+  gyedan=[80,90,130];
+  strech=[30,40,50];
+  swim=[50,90,120];
+  health=[38,55,82];
+  climb=[63,80,90];
+  joging=[70,80,90];
+  bike=[60,80,100];
+  walk=[21,40,42];
+  airlo=[50,60,70];
+  runningm=[28,30,33,35,38,40,43,45,48,50,53,55];
+  yoga=[25,33,50];
+  pila=[50];
+  trampol=[180];
+  spin=[140];
+  pt=[75];
+  chejo=[40];
+  breath=[25];
+  badmin=[45,70];
+  tenis=[70,60,80];
+  soccer=[90,110];
+  baegu=[40,60];
+  basket=[60,80];
+  base=[60,80];
 
  jsonData = {
-  numbers: [
-   { description: "1" },
-    { description: "2" },
-    { description: "3" }
+  
+  exercises: [
+    { description: "줄넘기"},
+    { description: "계단오르기"},
+    { description: "스트레칭" },
+    { description: "수영" },
+    { description: "헬스" },
+    { description: "등산" },
+    { description: "조깅"},
+    { description: "자전거타기"},
+    { description: "산책"},
+    { description: "에어로빅"},
+    { description: "런닝머신"},
+    { description: "요가" },
+    { description: "필라테스"},
+    { description: "트램폴린"},
+    { description: "스피닝"},
+    { description: "PT체조"},
+    { description: "체조"},
+    { description: "단전호흡"},
+    { description: "기타"},
+    { description: "배드민턴"},
+    { description: "테니스"},
+    { description: "축구"},
+    { description: "야구"},
+    { description: "배구"},
+    { description: "농구"}
   ],
-  fruits: [
-    { description: "Apple" },
-    { description: "Banana" },
-    { description: "Tangerine" }
+  three_steps: [
+    { description: "천천히" },
+    { description: "보통" },
+    { description: "빠르게" }
   ],
+  degree_steps: [
+    { description: "3.5" },
+    { description: "4" },
+    { description: "4.5" },
+    { description: "5" },
+    { description: "5.5" },
+    { description: "6" },
+    { description: "6.5" },
+    { description: "7" },
+    { description: "7.5" },
+    { description: "8" },
+    { description: "8.5" },
+    { description: "9" }
+  ],
+  defs : [
+    { description: "보통" }
+  ],
+  nomals : [
+    { description: "일반" }
+  ],
+  nomal_fasts : [
+    { description: "보통" },
+    { description: "빠르게" }
+  ],
+  tennis : [
+    { description: "일반" },
+    { description: "복식" },
+    { description: "단식" }
+  ],
+  balls : [
+    { description: "연습" },
+    { description: "경기" }
+  ],
+  yoga : [
+    { description:"일반"},
+    { description:"핫요가"},
+    { description:"플라잉 요가"}
+  ]
+  ,
+  times : [
+    {description: "10"},
+    {description: "20"},
+    {description: "30"},
+    {description: "40"},
+    {description: "50"},
+    {description: "60"},
+    {description: "70"},
+    {description: "80"},
+    {description: "90"},
+  ]
+  ,
   firstNames: [
     { name: "Fred", id: '1' },
     { name: "Jane", id: '2' },
@@ -114,7 +217,7 @@ export class MainPage {
     { name: "Smith", id: '104' }
   ]
 };
-  constructor(public modal:ModalController,private selector: WheelSelector,public _loadingCtrl:LoadingController,private afDatabase:AngularFireDatabase,public navCtrl: NavController) {
+  constructor(public navParams: NavParams,public menu:MenuController,public modal:ModalController,private selector: WheelSelector,public _loadingCtrl:LoadingController,private afDatabase:AngularFireDatabase,public navCtrl: NavController) {
 
     // this.getDaysOfMonth();
 
@@ -127,10 +230,32 @@ export class MainPage {
 
     console.log("constructor");
 
+
+    if(this.navParams.get("flag")=="transit"){
+      this.menu.close();
+    }
    
 
     this.showLoading();
 
+    this.firedata.child(this.userId).once('value').then((snapshot) =>{
+
+            var value:any;
+    
+            for(var result in snapshot.val()){
+
+              if(result=="duration"){
+                this.duration=snapshot.val()[result]
+                console.log("ss"+this.duration);
+              }
+              if(result=="interval"){
+                this.interval=snapshot.val()[result]
+                console.log("ss"+this.interval);
+              }
+              console.log(snapshot.val()[result]);
+              console.log(result);
+            }
+          });
   }
   counseling(){
     this.navCtrl.push(CounselingpagePage);
@@ -161,57 +286,86 @@ export class MainPage {
  clickcalendar(day){
   let modal = this.modal.create(CalendarmodalPage);
   modal.present();
-  modal.onDidDismiss( () => {
-    // this.createUser();
+  modal.onDidDismiss( (data) => {
+    console.log("dimissed")
+// console.log(data.duration);
+// console.log(data.interval);
   })
  }
+ // 운동 추가 항목 1
  setExercise(){
   this.selector.show({
     title: "운동종목을 정해주세요",
     items: [
-      this.jsonData.numbers
+      this.jsonData.exercises
     ],
     positiveButtonText: "Ok",
     negativeButtonText: "Nope",
     defaultItems: [
-      {index:0, value: this.jsonData.numbers[2].description},
+      {index:0, value: this.jsonData.exercises[2].description},
     ]
   }).then(
     result => {
       this.exerciseName=result[0].description;
+      this.exerciseIndex = result[0].index;
+      console.log(result[0]);
       console.log(result[0].description);
     },
     err => console.log('Error: ' + JSON.stringify(err))
     );
  }
+ // 운동 추가 항목 2
  setExercise1(){
+  var type = this.exerciseIndex;
+  var data;
+  if(type < 10)
+    data = this.jsonData.three_steps;
+  else if(type ==10) 
+    data = this.jsonData.degree_steps;
+  else if(type == 11 )
+    data = this.jsonData.yoga;
+  else if(type <= 15 )
+    data = this.jsonData.defs;
+  else if(type <= 18 )
+    data = this.jsonData.nomals;
+  else if(type == 19 )
+    data = this.jsonData.nomal_fasts;
+  else if(type == 20)
+    data = this.jsonData.tennis;
+  else 
+    data = this.jsonData.balls;
+
   this.selector.show({
-    title: "운동정도를 정해줗세요",
+    title: "운동정도를 정해주세요",
     items: [
-      this.jsonData.numbers
+      data
     ],
     positiveButtonText: "Ok",
     negativeButtonText: "Nope",
     defaultItems: [
-      {index:0, value: this.jsonData.numbers[2].description},
+      {index:0, value: data[0].description},
     ]
   }).then(
     result => {
       this.exerciseIntensity=result[0].description;
+      this.exerciseIntensity_index=result[0].index;
+      console.log(result[0]);
+      console.log(this.exerciseIntensity_index);
     },
     err => console.log('Error: ' + JSON.stringify(err))
     );
  }
+ // 운동 시간 입력하기
  setExercise2(){
   this.selector.show({
     title: "운동 시간을 정해주세요",
     items: [
-      this.jsonData.numbers
+      this.jsonData.times
     ],
     positiveButtonText: "Ok",
     negativeButtonText: "Nope",
     defaultItems: [
-      {index:0, value: this.jsonData.numbers[2].description},
+      {index:0, value: this.jsonData.times[2].description},
     ]
   }).then(
     result => {
@@ -221,8 +375,94 @@ export class MainPage {
     );
  }
  inputExercise(){
+   this.exerciseCal=this.exercise_cal();
+   console.log(this.exerciseCal);
    console.log(this.exerciseName);
-   this.firedata.child(this.userId).child("exercise").push({"name":this.exerciseName,"intensity":this.exerciseIntensity,"duration":this.exerciseDuration})
+   this.firedata.child("kim22@naver*com").child("exercise").push({"name":this.exerciseName,"intensity":this.exerciseIntensity,"duration":this.exerciseDuration})
+ }
+ // 칼로리 계산기
+ arr:any;
+ exercise_cal() {
+  var name = this.exerciseName;
+  var type = this.exerciseIntensity;
+  var time = this.exerciseDuration;
+
+  switch(name){
+      case "줄넘기":
+        this.arr=this.jul;
+        break;
+      case "배드민턴":
+        this.arr=this.badmin;
+        break;
+      case "테니스":
+        this.arr=this.tenis;
+        break;
+      case "수영":
+        this.arr=this.swim;
+        break;
+      case "트램폴린":
+        this.arr=this.trampol;
+        break;
+      case "스피닝":
+      this.arr=this.spin;
+      break;
+      case "축구":
+      this.arr=this.soccer;
+      break;
+      case "야구":
+      this.arr=this.base;
+      break;
+      case "배구":
+      this.arr=this.baegu;
+      break;
+      case "농구":
+      this.arr=this.basket;
+      break;
+      case "계단오르기":
+      this.arr=this.gyedan;
+      break;
+      case "PT체조":
+      this.arr=this.pt;
+      break;
+      case "스트레칭":
+      this.arr=this.strech;
+      break;
+      case "단전호흡":
+      this.arr=this.breath;
+      break;
+      case "헬스":
+      this.arr=this.health;
+      break;
+      case "런닝머신":
+      this.arr=this.runningm;
+      break;
+      case "요가":
+      this.arr=this.yoga;
+      break;
+      case "필라테스":
+      this.arr=this.pila;
+      break;
+      case "등산":
+      this.arr=this.climb;
+      break;
+      case "조깅":
+      this.arr=this.joging;
+      break;
+      case "자전거 타기":
+      this.arr=this.bike;
+      break;
+      case "산책":
+      this.arr=this.walk;
+      break;
+      case "체조":
+      this.arr=this.chejo;
+      break;
+      case "에어로빅":
+      this.arr=this.airlo;
+      break;
+  }
+  var v = time/10*this.arr[parseInt(this.exerciseIntensity_index)];
+  return v;
  }
  //==================== 음식 ====================//
  food_ex=false;
@@ -478,41 +718,22 @@ console.log(this.uid);
   }
 
   addEvent(day,flag) {
-
- 
-
     var newday="";
 
     var newMonth="";
-
     switch(this.currentMonth){
-
       case  "September":
-
       newMonth="09";
-
       break;
-
       case  "October":
-
       newMonth="10";
-
     }
-
     if(day<10){
-
       newday="0".concat(day);
-
     }else{
-
       newday=day;
-
     }
-
- 
-
     // this.navCtrl.push(AddEventPage,{"chosenDate":this.currentMonth+" , "+day,"flag":flag,"uid":this.uid,"year":this.currentYear,"month":newMonth,"day":newday});
-
   }
 
   async loadEvent(){
@@ -523,75 +744,59 @@ console.log(this.uid);
 
     var arrayseptember=new Array();
 
+    var arrayMay=new Array();
     var arrayoctober=new Array();
 
      new Promise((resolve, reject) => {
 
-  //   this.firedata.child(this.uid).child("record").once('value').then((snapshot) =>{
+    this.firedata.child(this.userId).child("record").once('value').then((snapshot) =>{
+        var value:any;
+        for(var result in snapshot.val()){
+          console.log(result); //20180915 2019057
+          var day ="";
+          if(result.length==8){
+            day = result.substring(6,8)
+          }else{
+            day = result.substring(6,7)
+          }
+        
+          var month=result.substring(4,6);
+          if(month=="05"){
+            console.log(snapshot.val()[result])
+            if(snapshot.val()[result].pic!=null&&snapshot.val()[result].pic!=undefined){
+              value= {[day]: [snapshot.val()[result].mensual,snapshot.val()[result].face,snapshot.val()[result].weight,,snapshot.val()[result].pic]};
+            }else{
+              value= {[day]: [snapshot.val()[result].mensual,snapshot.val()[result].face,snapshot.val()[result].weight]};
+            }
+            console.log("vaule sssss:");
+            console.log(value);
+            arrayMay.push(value);
+          }else if(month=="09"){
+            if(snapshot.val()[result].pic!=null&&snapshot.val()[result].pic!=undefined){
+              value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight,,snapshot.val()[result].pic]};
+            }else{
+              value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight]};
+            }
+            arrayseptember.push(value);
+          }else if(month=="10"){
+            if(snapshot.val()[result].pic!=null&&snapshot.val()[result].pic!=undefined){
+              value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight,snapshot.val()[result].pic]};
+            }else{
+              value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight]};
+            }
+            arrayoctober.push(value);
+          }
+          console.log("valueis");
+          console.log(arrayMay);
+        }
+        console.log("ab");
+        this.ar=arrayseptember; //<-- but here undefined,,, why????
+        this.ar_october=arrayoctober;
+          console.log(this.ar);
+          resolve();
+    this.big={"May":arrayMay,"September":this.ar,"October":this.ar_october}
 
-  //       var value:any;
-
-  //       for(var result in snapshot.val()){
-
-  //         console.log(result); //20180915
-
-  //         var day = result.substring(result.length-2,result.length);
-
-  //         var month=result.substring(result.length-4,result.length-2);
-
-  //         if(month=="09"){
-
-  //           if(snapshot.val()[result].pic!=null&&snapshot.val()[result].pic!=undefined){
-
-  //             value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight,,snapshot.val()[result].pic]};
-
-  //           }else{
-
-  //             value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight]};
-
-  //           }
-
-  //           arrayseptember.push(value);
-
-  //         }else if(month=="10"){
-
-  //           if(snapshot.val()[result].pic!=null&&snapshot.val()[result].pic!=undefined){
-
-  //             value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight,snapshot.val()[result].pic]};
-
-  //           }else{
-
-  //             value= {[day]: [snapshot.val()[result].exercise,snapshot.val()[result].face,snapshot.val()[result].weight]};
-
-  //           }
-
-  //           arrayoctober.push(value);
-
-  //         }
-
-  //         console.log("valueis");
-
-  //         console.log(value);
-
-  //       }
-
-  //       console.log("ab");
-
-  //       this.ar=arrayseptember; //<-- but here undefined,,, why????
-
-  //       this.ar_october=arrayoctober;
-
-  //         console.log(this.ar);
-
-  //         resolve();
-
-  //         this.a= {1: ["ab","testda"],3:["cccc"]}; 
-
-  //   this.big={"September":this.ar,"October":this.ar_october}
-
-  //   console.log(this.a);
-
-  //  })
+   })
 
   })
 
@@ -609,30 +814,21 @@ console.log(this.uid);
 
   checkEvent(day){
 
+    console.log("checkEvent come");
     this.checkingArray= new Array();
 
     //디비에서 해당일에 있는지 조회해서
 
     //어레이에 넣어줌. 
-
- 
-
     var array_keys = new Array();
-
       var array_values = new Array();
-
- 
 
       var second_array_keys=new Array();
 
       var second_array_values=new Array();
 
       var values=new Array();
-
- 
-
       var monthIndex=0;
-
       for (var key in this.big) {
 
           array_keys.push(key);
@@ -675,9 +871,9 @@ console.log(this.uid);
 
                   if(i==0){
 
-                    console.log("exercise : "+array_values[monthIndex][val][v][i]);
+                    console.log("mensual : "+array_values[monthIndex][val][v][i]);
 
-                    this.checkingArray.push({"exercise":array_values[monthIndex][val][v][i]});
+                    this.checkingArray.push({"mensual":array_values[monthIndex][val][v][i]});
 
                   }else if(i==1){
 
@@ -925,16 +1121,66 @@ var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
   }
 
+  generatingMensual(a){
+
+    var today=a;
+    console.log("day is : "+today);
+
+    var newday="";
+    var newMonth="";
+    switch(this.currentMonth){
+      case  "May":
+      newMonth="05";
+      break;
+      case  "September":
+      newMonth="09";
+      break;
+      case  "October":
+      newMonth="10";
+    }
+    if(today<10){
+      newday="0".concat(today);
+    }else{
+      newday=today;
+    }
+    console.log(newday);
+    console.log(newMonth);
+    console.log(this.currentYear);
+    for(var i=0; i<this.duration; i++){
+      
+      this.firedata.child(this.userId).child("record").child(this.currentYear+newMonth+(Number(newday)+i)).update({
+        "mensual":true
+      })
+    }
+    
+    console.log("generating mensual started");
+    this.loadEvent();
+  }
   selectDate(day) {
 
     console.log(this.currentMonth+"selectDate come:"+day);
-
     var result = this.checkEvent(day);
-
     console.log(result);
-
+    var date = this.currentMonth+" "+day;
     var flag=false;
+    //=============modal 추가 ==============//
+    let modal = this.modal.create(CalendarmodalPage,{date:date});
+    modal.present();
+    modal.onDidDismiss( (data) => {
+        console.log("dimissed")
+    console.log(data.duration);
+    console.log(data.interval);
+    console.log(this.duration);
+    console.log(this.interval);
+  
+    if(data.interval==true){
+      console.log("starting...");
+      this.generatingMensual(day);
+    }
 
+    });
+
+    //=====================================//
     if(result==undefined){
 
       flag=false;
@@ -1074,9 +1320,18 @@ var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
       }
 
     }
-
- 
-
-}
-
+  }
+  //========== 캘린더 이동 기능 =============//
+  //배란주기 캘린더
+  mv_main() {
+    this.navCtrl.setRoot(MainPage);
+  }
+  //인공수정 캘린더
+  mv_main2() {
+    this.navCtrl.setRoot(Main2Page);
+  }
+  //시험관 아기 캘린더
+  mv_main3() {
+    this.navCtrl.setRoot(Main3Page);
+  }
 }

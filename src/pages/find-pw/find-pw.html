@@ -1,0 +1,20 @@
+<!--
+  Generated template for the FindPwPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>비밀번호 찾기</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<div class="contents">
+  <p style="text-align: center;">가입시 작성한 이메일 주소를 입력하시면<br>해당 메일로 임시 비밀번호를 발송해드립니다.</p>
+  <h5>이메일</h5>
+  <input placeholder="ilove@naver.com" [(ngModel)]="email" type="email"/>
+  <button (click)="send()">전송하기</button>
+</div>
+</ion-content>

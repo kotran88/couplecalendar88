@@ -1,0 +1,82 @@
+<!--
+  Generated template for the SettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>setting</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="form">
+    <ion-list >
+      <!-- 이메일 -->
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:45%">버전 정보</ion-label>
+        <ion-label style="display:flex; width:45%">0.01</ion-label>
+      </ion-item>
+      <!-- 닉네임 -->
+      <ion-item class="content">
+        <ion-label style="display:inherit; position:relative; left:0px; width:40%">주기 설정</ion-label>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:45%">생리 주기</ion-label>
+        <ion-label style="display:flex; width:45%" (click)="setInterval();">{{interval}}</ion-label>
+      </ion-item>
+      <ion-item class="content email">
+        <ion-label style="display:flex; width:45%">생리 기간</ion-label>
+        <ion-label style="display:flex; width:45%">0.01</ion-label>
+      </ion-item>
+      </ion-list>
+
+      <strong>알람설정</strong>
+      <ion-list >
+        <!-- 이메일 -->
+        <ion-item class="content email">
+          <ion-label style="display:flex; width:45%">부부주기 알림</ion-label>
+          <ion-label style="display:flex; width:45%"> <ion-toggle [(ngModel)]="pepperoni"></ion-toggle></ion-label>
+        </ion-item>
+        <!-- 닉네임 -->
+        <ion-item class="content">
+          <ion-label style="display:inherit; position:relative; left:0px; width:40%">건강관리 알림</ion-label>
+          <ion-label style="display:flex; width:45%"> <ion-toggle [(ngModel)]="pepperoni"></ion-toggle></ion-label>
+        </ion-item>
+        <ion-item class="content email">
+          <ion-label style="display:flex; width:45%">병원 방문일 알림</ion-label>
+          <ion-label style="display:flex; width:45%"> <ion-toggle [(ngModel)]="pepperoni"></ion-toggle></ion-label>
+        </ion-item>
+        <ion-item class="content email">
+          <ion-label style="display:flex; width:45%">투약알림</ion-label> 
+           <ion-label style="display:flex; width:45%"> <ion-toggle [(ngModel)]="pepperoni"></ion-toggle></ion-label>
+        </ion-item>
+        </ion-list>
+
+      <strong>고객센터</strong>
+      <ion-list >
+        <ion-item class="content email">
+          <ion-label style="display:flex; width:45%">이용 약관</ion-label>
+        </ion-item>
+        <ion-item class="content">
+          <ion-label style="display:inherit; position:relative; left:0px; width:40%">문제 신고 및 고객문의</ion-label>
+        </ion-item>
+       
+        </ion-list>
+
+
+      <strong>계정</strong>
+      <ion-list >
+        <ion-item class="content email">
+          <ion-label style="display:flex; width:45%">로그아웃</ion-label>
+        </ion-item>
+        <ion-item class="content">
+          <ion-label style="display:inherit; position:relative; left:0px; width:40%">탈퇴</ion-label>
+        </ion-item>
+       
+        </ion-list>
+      </div>
+
+
+</ion-content>

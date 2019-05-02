@@ -1,0 +1,76 @@
+page-calendarmodal {
+    * {
+      font-weight: 600;
+    }
+    .nodisplay {
+      background-color:none;
+      color:grey;
+      border:none;
+    }
+    .modal_content {
+        text-align: center;
+        background: white;
+        position: absolute;
+        top: calc(20% - (40%/2));
+        left: 0;
+        right: 0;
+        width: 80%;
+        height: auto;
+        z-index: 100;
+        margin: 0 auto;
+        color: #333;
+        background: #fff;
+        box-shadow: 0 2px 3px rgba(51, 51, 51, .35);
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        overflow: hidden;
+      }
+  .modal_title {
+    padding: 6px 0;
+    background-color:#eeeeee;
+    font-size:4vw;
+  }
+  table {
+    font-size:3.6vw;
+    text-align: center;
+    width:100%;
+  }
+  td {
+    height:40px;
+    width:50%;
+  }
+  td > button {
+    border:1px solid grey;
+    border-radius : 5px;
+    width:50%;
+    background-color : whitesmoke;
+  }
+  .pick {
+        border-radius: 10px;
+        background-color:grey;
+        width:60%;
+        margin: 0 20%;
+        height:15px;
+        text-align: center;   
+  }
+  .pick > button {
+    position: relative;
+    border:1px solid grey;
+    border-radius : 10px;
+    background-color : whitesmoke;
+    width:43%;
+    height:25px;
+    font-size:10px;
+    font-weight:500;
+  }
+  #confirm_btn {
+    font-size:3vw;
+    margin:10px 0;
+    padding:5px;
+    width:40%;
+    border-radius: 5px;
+    border:1px solid grey;
+  }
+  
+}

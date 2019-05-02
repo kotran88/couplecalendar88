@@ -1,0 +1,410 @@
+<!--
+
+  Generated template for the MainPage page.
+
+ 
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+
+  Ionic pages and navigation.
+
+-->
+
+<ion-header no-border style="border: 0px !important;
+
+border-bottom-color: transparent !important;
+
+background-image: none !important;
+
+border-bottom: none !important; z-index: 11 !important">
+
+  <ion-navbar #content style="border: 0px !important;
+ transform: none !important;
+  border-bottom-color: transparent !important;
+  background-image: none !important;
+  border-bottom: none !important;">
+
+      <button  style="left: 0px;
+
+      position: absolute;"  ion-button menuToggle>
+
+          <img src="assets/imgs/menumenu.png" style="width:22px;"  name="menu"/>
+
+        </button>
+        <div style="  font-size:17px;  text-align: center;" class="title">
+
+                {{title}}
+
+              </div>
+
+    <img src="assets/imgs/magnify.png" (click)="search();" style="font-size: 1.8em;
+
+    right: 15%;
+
+    width:22px;
+
+    position: absolute;
+
+    color:gray;
+
+    bottom: 10px;
+
+     " name="search"/>
+
+ 
+
+
+  </ion-navbar>
+
+ 
+
+</ion-header>
+
+ 
+
+<ion-content padding>
+
+    <div class="calendar-header">
+
+      <ion-row class="calendar-month">
+
+        <ion-col col-2 (click)="goToLastMonth()"><ion-icon name="arrow-back"></ion-icon></ion-col>
+
+        <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+
+        <ion-col col-2 (click)="goToNextMonth()"><ion-icon name="arrow-forward"></ion-icon></ion-col>
+
+      </ion-row>
+
+    </div>
+
+    <div class="calendar-body">
+
+      <ion-grid>
+
+        <ion-row class="calendar-weekday">
+
+          <ion-col>Su</ion-col>
+
+          <ion-col>Mo</ion-col>
+
+          <ion-col>Tu</ion-col>
+
+          <ion-col>We</ion-col>
+
+          <ion-col>Th</ion-col>
+
+          <ion-col>Fr</ion-col>
+
+          <ion-col>Sa</ion-col>
+
+        </ion-row>
+
+        <ion-row class="calendar-date">
+
+          <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>
+
+          <ion-col style="height:85px; border-top:1px solid #3D3E3F;" col-1 *ngFor="let day of daysInThisMonth" (click)="selectDate(day)">
+
+            <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}
+
+              </span>
+
+           
+
+            <ng-template #otherDate class="otherDate">
+
+              {{day}}<br>
+
+             
+
+            </ng-template>
+
+            <div (click)="clickcalendar(day);"  *ngFor="let a of checkEvent(day)">
+
+              <!-- <span  *ngIf="a.exercise!='no'&&a.exercise"><img style="width:14px; height:14px;" *ngIf="a.exercise!='no'" src="./../../assets/icon/weightlifting.png" />  </span>
+
+              <span class="face" *ngIf="a.face!='no'&&a.face"><img style="width:12px; height:12px;" *ngIf="a.face!='no'" src="./../../assets/icon/soap.png" /> </span> 
+
+              <span class="weight" *ngIf="a.weight!='no'&&a.weight"><img style="width:12px; height:12px;" *ngIf="a.exercise!='no'" src="./../../assets/icon/weight.png" /> {{a.weight}} </span> 
+
+              <span class="photo" *ngIf="a.photo!='no'&&a.photo"><img style="width:12px; height:12px;" *ngIf="a.photo!='no'" src="./../../assets/icon/photo-camera.png" />  </span>  -->
+
+              </div>
+
+          </ion-col>
+
+          <!-- <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col> -->
+
+        </ion-row>
+
+      </ion-grid>
+
+    </div>
+
+    <div class="bottommain" >
+
+오후 2:00 병원 방문입니다.
+
+    </div>
+
+    <div class="bottommain">
+
+ <p class="subtitle">병원 일정</p>  <p class="subsub" (click)="expand_cal()">ㅇㅇㅇ병원에 오후 2시 방문 예정입니다</p> 
+      <div [ngClass]="hospital_ex==false?'nodisplay':'display'" style="padding:2%;">
+          <p>* 다음 배란 예정일이 00 00 입니다.</p>
+      </div>
+    </div>
+
+    <div class="bottommain" >
+
+ <p class="subtitle">주사</p>  <p class="subsub">호르몬 주사 투여기간입니다.</p>
+
+    </div>
+
+    <div class="bottommain">
+        <p class="subtitle">운동</p> <p class="subsub" (click)="expand()">운동량을 체크해주세요</p> 
+        <div [ngClass]="expanding==false?'nodisplay':'display'" style="padding-bottom:15px; padding-top:2px;">
+          <button  [ngClass]="exercise_add==true?'display':'nodisplay' " (click)="add_exercise()"style="font-size:10px; background-color: #fff; border:1px dotted grey; width:80px; height:70px; margin: 0 3%;">운동추가</button>
+        <div [ngClass]="exercise_add==false?'display_add':'nodisplay' " >
+          <!-- 운동종목 -->
+            <div class="exercise_type">
+                  <p>운동종목</p>
+                  <div style="border:1px solid grey;margin-bottom: 3%;">
+                    <div (click)="setExercise();" style="width:80%; margin:0 10%; display:grid;">
+                      <button (click)="change_ex_before()" style="width:100%">ㅅ</button>
+                      <input style="text-align: center;"    value={{exerciseName}} type="text" size=6 readonly/>
+                      <button (click)="change_ex_after()" style="width:100%">V</button>
+                    </div>
+                   
+                  </div>
+            </div>
+          <!-- 운동량 -->
+            <div class="exercise_rate">
+                  <p>운동량</p>
+                  <div style="display: flex;border:1px solid grey;margin-bottom: 3%;">
+                    <div (click)="setExercise1();" style="width: 50%;display: grid;">
+                      <button >ㅅ</button>
+                      <input style="text-align: center;"  value={{exerciseIntensity}} type="text" size=4 readonly/>
+                      <button>V</button>
+                    </div>
+                    <div (click)="setExercise2();" style="width: 40%;display: grid;">
+                      <button>ㅅ</button>
+                      <input style="text-align: center;" value={{exerciseDuration}} type="text" size=3 readonly/>
+                      <button >V</button>
+                    </div>
+                    <div style="width:10%; display:grid;"> <p>분</p></div>
+                </div>
+              
+            </div>
+          </div>
+          <button ion-button style="margin:2% 30% 0 30%;" [ngClass]="exercise_add==false?'display_add':'nodisplay' " (click)="inputExercise();">입력하기</button>
+          <!-- <button (click)="exercise_input()"  style="width:40%;  border:1px solid grey;" >입력</button> -->
+        </div>
+    </div>
+
+    <div class="bottommain">
+
+        <p class="subtitle">식단</p>  <p (click)="expand_food()" class="subsub">단백질과 야채 섭취량을 체크</p>
+        <div [ngClass]="food_ex==false?'nodisplay':'display'" style="padding:2%;">
+          <div class="food_daily">
+            <!-- 각 div 별 단백질 , 야채 값 넣기 -->
+              <div (click)="add_food('morning')">
+                <p>아침</p>
+                +
+              </div>
+              <div (click)="add_food('noon')">
+                <p>점심</p>
+                +
+              </div>
+              <div (click)="add_food('dinner')">
+                <p>저녁</p>
+                +
+              </div>
+              <div (click)="add_food('etc')">
+                <p>간식</p>
+                +
+              </div>
+          </div>
+          <div [ngClass]="food_add==false?'nodisplay':'display'" style="margin:2% 0;">
+            <div class="food_add" style="border:1px dotted grey;">
+              <p>단백질 :</p>
+              <p>야채 :</p>
+            </div>
+            <button (click)="food_input()" style="width:40%; margin:2% 30% 0 30%; border:1px solid grey;">입력</button>
+          </div>
+        </div>
+    </div>
+
+    <div class="bottommain">
+
+        <p class="subtitle">카페인</p> <p class="subsub" (click)="expand_caffein()">카페인 섭취량을 체크해주세요</p>
+        <div [ngClass]="caffein_ex==false?'nodisplay':'display'" style="padding:2%; text-align:center;" >
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+              <img (click)="click_coffee($event)" src="assets/imgs/gauge/coffee2.png" class="coffee">
+
+        </div>
+    </div>
+
+    <div class="bottommain">
+
+        <p class="subtitle">물</p> <p class="subsub" (click)="expand_water()">물 섭취량을 체크해주세요</p>
+        <div [ngClass]="water_ex==false?'nodisplay':'display'" style="padding:2%; text-align:center;">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+            <img (click)="click_water($event)" src="assets/imgs/gauge/water2.png" class="water">
+
+        </div>
+    </div>
+
+    <div class="selected-event" *ngIf="isSelected">
+
+      <ion-list>
+
+        <ion-item *ngFor="let se of selectedEvent">
+
+          <ion-buttons end>
+
+            <button ion-button clear icon-only (click)="deleteEvent(se)">
+
+              <ion-icon name="close"></ion-icon>
+
+            </button>
+
+          </ion-buttons>
+
+          <h2>{{se.title}}</h2>
+
+          <h3>{{se.message}}</h3>
+
+          <p>Start Date: {{se.startDate}}<br>
+
+          Start Date: {{se.endDate}}</p>
+
+        </ion-item>
+
+      </ion-list>
+
+    </div>
+
+  </ion-content>
+
+ 
+
+  
+
+  <ion-menu style="    z-index: 9999999999 !important;"class="ionmenu" [content]="content"  side="left">
+
+      <ion-content class="c">
+
+          
+
+          
+
+         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+
+            
+
+ 
+
+            </button>
+
+
+            
+
+            <ion-list>
+              <ion-item (click)="setting()" >
+
+                Setting
+
+               </ion-item>
+
+                <ion-item (click)="menuItemHandlerfirst()" >
+
+                    Mom & Daddy in Love
+
+                   </ion-item>
+
+                   <ion-item-group submenu [class.visible]="showSubmenufirst">
+
+                      <ion-item submenu-item>About</ion-item>
+
+                      <ion-item submenu-item>For My Baby(Webtoon)</ion-item>
+
+                      <ion-item submenu-item>Medical Information</ion-item>
+
+                    </ion-item-group>
+
+                <ion-item (click)="menuItemHandler()" >
+
+                   부부캘린더
+
+                  </ion-item>
+
+                  <ion-item-group submenu [class.visible]="showSubmenu">
+
+                      <ion-item (click)="mv_main()" submenu-item>배란 주기 캘린더</ion-item>
+
+                      <ion-item (click)="mv_main2()" submenu-item>인공수정 캘린더</ion-item>
+
+                      <ion-item (click)="mv_main3()" submenu-item>시험관 아기 캘린더</ion-item>
+
+                    </ion-item-group>
+
+ 
+
+                  <ion-item  (click)="menuItemHandlerthird()">
+
+                      부부 습관 개선
+
+                    </ion-item>
+                    <ion-item-group submenu [class.visible]="showSubmenuthird">
+
+                      <ion-item submenu-item (click)="gotomanagement();">운동</ion-item>
+                      <ion-item submenu-item>식단</ion-item>
+                      <ion-item submenu-item>카페인</ion-item>
+                      <ion-item submenu-item>물</ion-item>
+
+                    </ion-item-group>
+                    <ion-item (click)="menuItemHandlerfourth()"
+                   >
+
+                       심리상담
+
+                      </ion-item>
+                      <ion-item-group submenu [class.visible]="showSubmenufourth">
+
+                        <ion-item  (click)="counseling();" submenu-item >심리 상담 신청</ion-item>
+                        <ion-item submenu-item>자조 모임 신청</ion-item>
+  
+                      </ion-item-group>
+                      <ion-item >
+
+                          배우자 초대
+
+                        </ion-item>
+
+                      
+
+                     
+
+            </ion-list>
+
+    
+
+  </ion-content>
+
+  </ion-menu>
+
+

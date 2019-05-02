@@ -1,1 +1,106 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+  <ion-menu  persistent = "true" style="    z-index: 9999999999 !important;"class="ionmenu" [content]="mycontent"  side="left">
+
+    <ion-content class="c">
+
+        
+
+        
+
+       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+
+          
+
+
+
+          </button>
+
+
+          
+
+          <ion-list>
+            <ion-item (click)="setting()" >
+
+              Setting
+
+             </ion-item>
+
+              <ion-item (click)="menuItemHandlerfirst()" >
+
+                  Mom & Daddy in Love
+
+                 </ion-item>
+
+                 <ion-item-group submenu [class.visible]="showSubmenufirst">
+
+                    <ion-item submenu-item>About</ion-item>
+
+                    <ion-item submenu-item>For My Baby(Webtoon)</ion-item>
+
+                    <ion-item submenu-item>Medical Information</ion-item>
+
+                  </ion-item-group>
+
+              <ion-item (click)="menuItemHandler()" >
+
+                 부부캘린더
+
+                </ion-item>
+
+                <ion-item-group submenu [class.visible]="showSubmenu">
+
+                    <ion-item (click)="mv_main()" submenu-item>배란 주기 캘린더</ion-item>
+
+                    <ion-item (click)="mv_main2()" submenu-item>인공수정 캘린더</ion-item>
+
+                    <ion-item (click)="mv_main3()" submenu-item>시험관 아기 캘린더</ion-item>
+
+                  </ion-item-group>
+
+
+
+                <ion-item  (click)="menuItemHandlerthird()">
+
+                    부부 습관 개선
+
+                  </ion-item>
+                  <ion-item-group submenu [class.visible]="showSubmenuthird">
+
+                    <ion-item submenu-item (click)="gotomanagement();">운동</ion-item>
+                    <ion-item submenu-item>식단</ion-item>
+                    <ion-item submenu-item>카페인</ion-item>
+                    <ion-item submenu-item>물</ion-item>
+
+                  </ion-item-group>
+                  <ion-item (click)="menuItemHandlerfourth()"
+                 >
+
+                     심리상담
+
+                    </ion-item>
+                    <ion-item-group submenu [class.visible]="showSubmenufourth">
+
+                      <ion-item  (click)="counseling();" submenu-item >심리 상담 신청</ion-item>
+                      <ion-item submenu-item>자조 모임 신청</ion-item>
+
+                    </ion-item-group>
+                    <ion-item >
+
+                        배우자 초대
+
+                      </ion-item>
+
+                    
+
+                   
+
+          </ion-list>
+
+  
+
+</ion-content>
+
+</ion-menu>
+  
+  <ion-nav  #mycontent [root]="rootPage"></ion-nav>
+

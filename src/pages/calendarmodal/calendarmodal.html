@@ -1,0 +1,59 @@
+
+
+<ion-content class="main-view" style="background: transparent;
+background-color: transparent;
+top: 30%;" padding>
+    
+  <div class="modal_content">
+    <div class="modal_title">{{date}}</div>
+    <table>
+      <tr>
+        <td>Loved Day</td>
+        <td><img src="assets/imgs/love_ledline.png" (click)="loveday($event)"></td>
+      </tr>
+      <tr>
+        <td>생리 시작</td>
+        <td style="position:absolute;"> 
+          <!-- <div class="pick" style="position:absolute; top:35%;">
+            <button (click)="sgri_st_true()" [ngClass]="sgri_start==true?'display':'nodisplay'" style="top:-35%;">ON</button>
+            <button (click)="sgri_st_false()" [ngClass]="sgri_start==true?'nodisplay':'display'" style="top:-35%;">OFF</button>
+          </div> -->
+          <ion-toggle style="margin: auto;" [(ngModel)]="interval"></ion-toggle>
+        </td>
+      </tr>
+      <tr>
+        <td>생리 마침</td>
+        <td style="position:absolute;"> 
+            <!-- <div class="pick" style="position:absolute; top:35%;">
+              <button (click)="sgri_end_true()" [ngClass]="sgri_end==true?'display':'nodisplay'"  style="top:-35%;">ON</button>
+              <button (click)="sgri_end_false()" [ngClass]="sgri_end==true?'nodisplay':'display'"  style="top:-35%;">OFF</button>
+            </div> -->
+            <ion-toggle style="margin: auto;" [(ngModel)]="duration"></ion-toggle>
+          </td>
+      </tr>
+      <tr>
+        <td>생리 양</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>생리 통</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>병원 방문</td>
+        <td><button (click)="hospital_visit()">일시</button></td>
+      </tr>
+      <tr>
+        <td>체중(BMI)</td>
+        <td><button (click)="bmi_write()">기록</button></td>
+      </tr>
+      <tr>
+        <td>노트</td>
+        <td><button (click)="note_write()">기록</button></td>
+      </tr>
+    </table>
+
+  <button id="confirm_btn"(click)="confirm()">등록</button>
+  </div>
+  </ion-content>
+  

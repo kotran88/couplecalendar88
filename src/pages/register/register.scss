@@ -1,0 +1,31 @@
+page-register {
+* {
+    font-size:3.4vw;
+}
+ion-label {
+    color:black;
+}
+ion-list {
+    margin-bottom:16px;
+}
+.scroll-content {
+    overflow-y: hidden;
+ }
+ .item-ios.item-block .item-inner{
+     border-style:none;
+ }
+ .email .item-inner > .input-wrapper{
+     display:list-item;
+ }
+ .boxBtn {
+     font-weight: border;
+     position: absolute;
+     left:15%;
+     border:1px solid grey;
+     width:70%;
+     border-radius: 5px;
+ }
+ .radio-box>* {
+    margin-left:10px;
+ }
+}
